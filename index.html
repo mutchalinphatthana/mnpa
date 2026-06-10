@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Muchalin Phatthana - หมายเลข 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #f0ede8;
+      color: #3a3a3a;
+      overflow-x: hidden;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #e8e0d0 0%, #f5f0e8 30%, #fff8ee 60%, #e8dfc8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    /* Decorative columns left/right */
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      background: linear-gradient(to bottom, rgba(200,190,170,0.3), rgba(220,210,190,0.1));
+      border-right: 2px solid rgba(180,165,140,0.3);
+    }
+    .hero::before { left: 0; border-right: 2px solid rgba(180,165,140,0.3); }
+    .hero::after  { right: 0; border-left: 2px solid rgba(180,165,140,0.3); border-right: none; }
+
+    .logo-mp {
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #b8a878, #e8d898, #a89060, #d4c080);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+      text-shadow: none;
+      filter: drop-shadow(0 2px 8px rgba(168,144,80,0.4));
+    }
+
+    .candidate-number {
+      font-family: 'Cinzel', serif;
+      font-size: 7rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #c8b888 0%, #f0e0a0 40%, #a89060 70%, #e0cc88 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 4px 16px rgba(168,144,80,0.5));
+      line-height: 1;
+      margin: 8px 0;
+    }
+
+    .ribbon-wrap {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 15%, #fff 50%, rgba(255,255,255,0.9) 85%, transparent);
+      padding: 12px 60px;
+      margin: 16px 0;
+      position: relative;
+      box-shadow: 0 2px 20px rgba(168,144,80,0.2);
+    }
+    .ribbon-wrap::before, .ribbon-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 20px;
+      background: rgba(168,144,80,0.15);
+    }
+    .ribbon-wrap::before { left: 0; clip-path: polygon(0 0, 100% 0, 80% 50%, 100% 100%, 0 100%); }
+    .ribbon-wrap::after  { right: 0; clip-path: polygon(100% 0, 0 0, 20% 50%, 0 100%, 100% 100%); }
+
+    .team-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: #8a7850;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    /* President photo area */
+    .president-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 32px 0 16px;
+      gap: 0;
+    }
+
+    .president-frame {
+      width: 220px;
+      height: 280px;
+      position: relative;
+    }
+
+    /* ถ้าไม่มีรูป ให้แสดง placeholder */
+    .president-frame .photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 3px solid rgba(168,144,80,0.5);
+      box-shadow: 0 8px 32px rgba(168,144,80,0.3), inset 0 0 20px rgba(255,255,255,0.5);
+    }
+
+    /* ป้ายชื่อ */
+    .name-plate {
+      background: linear-gradient(135deg, #c8c0b0, #e8e0d0, #b8b0a0);
+      border: 2px solid rgba(168,144,80,0.5);
+      border-radius: 6px;
+      padding: 10px 28px;
+      margin-top: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .name-plate .role {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #5a5040;
+    }
+    .name-plate .full-name {
+      font-size: 0.95rem;
+      color: #7a6a50;
+      margin-top: 2px;
+    }
+
+    /* ===== TEAM ROW ===== */
+    .team-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .member-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .member-photo {
+      width: 130px;
+      height: 170px;
+      border-radius: 6px;
+      border: 2px solid rgba(168,144,80,0.4);
+      background: linear-gradient(135deg, #e8e0d0, #f5f0e8);
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .member-plate {
+      background: linear-gradient(135deg, #c8c0b0, #ddd8cc);
+      border-radius: 4px;
+      padding: 6px 16px;
+      text-align: center;
+      border: 1px solid rgba(168,144,80,0.4);
+    }
+    .member-plate .role { font-size: 0.85rem; font-weight: 700; color: #5a5040; }
+    .member-plate .name { font-size: 0.8rem; color: #7a6a50; }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 48px auto;
+      max-width: 600px;
+      padding: 0 24px;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,144,80,0.5), transparent);
+    }
+    .divider-icon {
+      font-size: 1.2rem;
+      color: rgba(168,144,80,0.7);
+    }
+
+    /* ===== POLICY SECTION ===== */
+    .section {
+      padding: 60px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      font-size: 2.4rem;
+      background: linear-gradient(135deg, #b8a878, #e8d898, #a89060);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 40px;
+      filter: drop-shadow(0 2px 8px rgba(168,144,80,0.3));
+    }
+
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .policy-card {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(168,144,80,0.25);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(168,144,80,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .policy-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(168,144,80,0.2);
+    }
+
+    .policy-icon { font-size: 2rem; margin-bottom: 12px; }
+    .policy-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #5a4a30;
+      margin-bottom: 10px;
+    }
+    .policy-desc {
+      font-size: 0.88rem;
+      color: #6a6050;
+      line-height: 1.7;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, #3a3530, #5a5040);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.9rem;
+    }
+    footer .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, #c8b888, #f0e0a0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .candidate-number { font-size: 5rem; }
+      .logo-mp { font-size: 2.5rem; }
+      .president-frame { width: 180px; height: 230px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="logo-mp">Mp</div>
+  <div class="candidate-number">3</div>
+
+  <div class="ribbon-wrap">
+    <span class="team-name">Muchalin Phatthana</span>
+  </div>
+
+  <!-- ประธาน -->
+  <div class="president-section">
+    <div class="president-frame">
+      <!--
+        วิธีตั้งชื่อและใส่รูป:
+        1. บันทึกรูปประธานไว้ในโฟลเดอร์เดียวกับไฟล์ index.html
+        2. ตั้งชื่อรูปว่า  president.jpg  (ไม่มีช่องว่าง ไม่มีภาษาไทย)
+        3. แก้ src="president.jpg" ด้านล่างนี้
+
+        ตัวอย่างการตั้งชื่อไฟล์รูปที่ดี:
+          ✅ president.jpg
+          ✅ vice-president-male.jpg
+          ✅ secretary.jpg
+          ✅ vice-president-female.jpg
+          ❌ ประธาน.jpg      (ภาษาไทย → ใช้ไม่ได้ใน URL)
+          ❌ my photo.jpg    (มีช่องว่าง → ควรหลีกเลี่ยง)
+      -->
+      <img src="IMG_2531.jpg" alt="ประธาน" class="photo"
+           onerror="this.style.background='linear-gradient(135deg,#e8e0d0,#d0c8b8)'; this.style.display='block'; this.alt='วางรูปประธานที่นี่'"/>
+    </div>
+    <div class="name-plate">
+      <div class="role">ประธาน</div>
+      <div class="full-name">นาย ศักรินทร์ กลิ่นจำปา</div>
+    </div>
+  </div>
+
+  <!-- ทีม -->
+  <div class="team-row">
+    <div class="member-card">
+      <!-- ตั้งชื่อรูปว่า vice-male.jpg -->
+      <img src="IMG_1294.png" alt="รองชาย" class="member-photo"
+           onerror="this.style.background='linear-gradient(135deg,#e8e0d0,#d0c8b8)'"/>
+      <div class="member-plate">
+        <div class="role">รองชาย</div>
+        <div class="name">นาย ยศทศักดิ์ จันทวงค์</div>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <!-- ตั้งชื่อรูปว่า secretary.jpg -->
+      <img src="IMG_2533.jpg" alt="เลขานุการ" class="member-photo"
+           onerror="this.style.background='linear-gradient(135deg,#e8e0d0,#d0c8b8)'"/>
+      <div class="member-plate">
+        <div class="role">เลขานุการ</div>
+        <div class="name">นาย ปุญญพัฒน์ สารโม</div>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <!-- ตั้งชื่อรูปว่า vice-female.jpg -->
+      <img src="IMG_2532.jpg" alt="รองหญิง" class="member-photo"
+           onerror="this.style.background='linear-gradient(135deg,#e8e0d0,#d0c8b8)'"/>
+      <div class="member-plate">
+        <div class="role">รองหญิง</div>
+        <div class="name">นางสาว รัญญรัตน์ สรวงวัฒนา</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== POLICY ====== -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-icon">✦</div>
+  <div class="divider-line"></div>
+</div>
+
+<section class="section">
+  <div class="section-title">นโยบาย</div>
+  <div class="policy-grid">
+
+    <div class="policy-card">
+      <div class="policy-icon">⚖️</div>
+      <div class="policy-title">สนับสนุนความเท่าเทียม</div>
+      <div class="policy-desc">ไม่ว่าจะเป็นเพศหญิง เพศชาย รวมไปถึง LGBTQ+ ทุกคนเท่าเทียมกันและควรได้รับโอกาสในการแสดงศักยภาพอย่างเต็มที่</div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-icon">♻️</div>
+      <div class="policy-title">สุขใจเล่า จะเท่าสุขา</div>
+      <div class="policy-desc">นโยบายกระดาษผ่านอนามัยโดยการรับบริจาค reuse จากนักเรียนและบุคลากร นำมาใส่ตู้ที่ห้องน้ำหญิงทุกคนสามารถหยิบใช้ได้</div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-icon">🎮</div>
+      <div class="policy-title">การแข่งขัน E-Sport</div>
+      <div class="policy-desc">จัดการแข่งขัน E-Sports ภายในโรงเรียน เช่น ROV, FIFA, Free Fire เพื่อส่งเสริมทักษะการใช้เทคโนโลยีและความสามัคคี</div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-icon">🤝</div>
+      <div class="policy-title">หมู่เบิ้งแยงกัน</div>
+      <div class="policy-desc">จัดทีมอาสาให้คำปรึกษาและคำแนะนำ ช่วยเหลือนักเรียนที่มีปัญหาทางการเรียน 0.5 ม.ส เพื่อให้นักเรียนโรงเรียนเราติด 0.5 ม.ส ลดลง</div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-icon">🚽</div>
+      <div class="policy-title">ห้องน้ำสะอาด ปราศจากนักจิตรกรรม</div>
+      <div class="policy-desc">ตรวจสอบความสะอาด เรียบร้อย แจ้งซ่อมอุปกรณ์ที่ชำรุด และรณรงค์การใช้ห้องน้ำอย่างถูกสุขลักษณะ</div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-icon">📢</div>
+      <div class="policy-title">กระบอกเสียงการเรียนการสอน</div>
+      <div class="policy-desc">หาข้อมูลเกี่ยวกับการศึกษาต่อระดับมหาวิทยาลัย แต่ละที่ประชาสัมพันธ์ให้ เช่น เกณฑ์รับสมัคร วันเวลาสอบ สถานที่ติดสอบ</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Muchalin Phatthana · หมายเลข 3</div>
+  <p>เพื่อโรงเรียนที่ดีกว่า · เพื่อนักเรียนทุกคน</p>
+</footer>
+
+</body>
+</html>
